@@ -28,17 +28,17 @@ function displayHr() {
         let col2 = $("<div class='col-sm-8'>");
 
         let textArea = $("<textarea class='form-control'>");
-        if ( currentHr === arr[i]){
+        if (currentHr === arr[i]) {
             textArea.addClass("bg-danger");
-        } 
-        else if ( currentHr > arr[i] ){
+        }
+        else if (currentHr > arr[i]) {
             textArea.addClass("bg-secondary");
         }
         else {
             textArea.addClass("bg-success");
         }
         textArea.attr("id", "textarea" + i);
-        let value = localStorage.getItem("textarea"+i);
+        let value = localStorage.getItem("textarea" + i);
         textArea.val(value);
         col2.append(textArea);
 
@@ -47,7 +47,7 @@ function displayHr() {
 
         let saveBtn = $("<button class='btn-lg btn btn-primary saveBtn'>");
         let saveIcon = $("<i class='fas fa-save'>");
-
+        saveBtn.attr("id", i)
         const clearBtn = $("<button class='clearBtn btn btn-danger btn-lg'>");
         const clearIcon = $("<i class='fa fa-trash'>");
         clearBtn.attr("id", i);
@@ -67,15 +67,16 @@ function displayHr() {
 
 displayHr();
 
-$(".saveBtn").on('click', function() {
-    for ( let i=0; i < arr.length; i++){
-        let value = $("#textarea" + i).val()
-        localStorage.setItem("textarea"+i, value);
-    }
-    
+
+$(".saveBtn").on('click', function () {
+    let currentId = $(this).attr("id");
+    let value = $("#textarea" + currentId).val()
+    localStorage.setItem("textarea" + currentId, value);
+
+
 })
 
-$(".clearBtn").on('click', function() {
+$(".clearBtn").on('click', function () {
     let currentId = $(this).attr("id");
     $("#textarea" + currentId).val("");
     localStorage.setItem("textarea" + currentId, "");
